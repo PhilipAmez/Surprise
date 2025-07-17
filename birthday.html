@@ -9,7 +9,9 @@
     body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle, #ffe6f0, #e6ccff);
+      background-repeat: no-repeat;
+      background-size: fill;
+      /* background: radial-gradient(circle, #ffe6f0, #e6ccff); */
       font-family: 'Lora', serif;
       display: flex;
       flex-direction: column;
@@ -39,7 +41,7 @@
     h1 {
       font-family: 'Dancing Script', cursive;
       font-size: 6vw;
-      color: #c71585;
+      color: #fff7faec;
       margin: 2vh 0;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
@@ -51,18 +53,24 @@
       line-height: 1.4;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
+    #surprise span{
+     
+    }
 
-    #surprise {
+    #surprise {font-family: Verdana, Geneva, Tahoma, sans-serif;
       display: none;
+      align-content: center;
       margin: 2vh 10px;
       font-size: 2.5vw;
-      color: #4b0082;
-      background: rgba(255, 255, 255, 0.9);
+      color: #fff7faec;
+      background: rgba(197, 1, 115, 0.9);
       padding: 20px;
+      padding-left: 100px;
       border-radius: 15px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       max-width: 80%;
       animation: bounceIn 0.8s ease-out;
+
     }
 
     @keyframes bounceIn {
@@ -76,19 +84,25 @@
       justify-content: center;
       margin-top: 20px;
       flex-wrap: wrap;
+      background-color: #a80858;
     }
 
     .birthday-photo {
       max-width: 30%;
       height: auto;
-      border: 10px solid #fff;
+      border: 10px solid #be0c5f;
       border-radius: 5px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease;
       margin: 0 -15px;
       position: relative;
       z-index: 1;
+      transform: rotate(0deg);
+      will-change: transform;
+      animation: bounceIn 0.8s ease-out;
     }
+   
+
 
     .birthday-photo:nth-child(1) {
       transform: rotate(-5deg);
@@ -114,7 +128,7 @@
       font-size: 2.5vw;
       font-family: 'Lora', serif;
       border: none;
-      background: linear-gradient(45deg, #ff69b4, #ff1493);
+      background: linear-gradient(45deg, #da1d7b, #ff1493);
       color: white;
       border-radius: 25px;
       cursor: pointer;
@@ -125,7 +139,7 @@
 
     button:hover {
       transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(255, 20, 147, 0.5);
+      box-shadow: 0 6px 15px rgb(199, 9, 110);
     }
 
     .confetti {
@@ -133,8 +147,8 @@
       width: 10px;
       height: 10px;
       background-color: #ff4081;
-      animation: fall 4s linear forwards;
-      opacity: 0.8;
+      animation: fall 10s linear forwards;
+      opacity: 0.2;
     }
 
     .heart {
@@ -157,17 +171,26 @@
       p {
         font-size: 5vw;
       }
+      body{
+        background-repeat: no-repeat;
+      background-size: cover;
+      }
+      #surprise span{
+      
+    }
       #surprise {
         font-size: 4.5vw;
         padding: 15px;
+        margin: 10px;
       }
       .photo-collage {
         flex-direction: column;
         align-items: center;
+        background-color: #a80858;
       }
       .birthday-photo {
         max-width: 80%;
-        border: 8px solid #fff;
+        border: 8px solid #a80858;
         margin: 10px 0;
         transform: none !important;
       }
@@ -178,32 +201,195 @@
         font-size: 4.5vw;
         padding: 2vh 5vw;
       }
+      .prev, .next {
+       width: 3px;
+       border-radius: 50px;
+        font-size: 4vw;
+        padding: 3px 6px;
+        top: 45%;
+        transform: translateY(-50%);
+        background: rgba(255, 20, 147, 0.7);
+        color: #fff;
+
+      }
     }
+
+    .slideshow-container {
+      position: relative;
+      max-width: 80vw;
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40vh;
+      background: #a80858;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+
+    .slide-photo {
+      object-fit: contain;
+      display: none;
+      max-width: 90%;
+      max-height: 50vh;
+      border: 10px solid #fff;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      margin: 0 auto;
+      animation: bounceIn 0.8s;
+    }
+
+    .slide-photo.active {
+      display: block;
+      image-rendering: pixelated;
+      animation: fadeIn 2s ease-in-out;
+
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 20, 147, 0.7);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 2.5vw;
+      padding: 10px 16px;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.2s;
+      user-select: none;
+    }
+
+    .prev:hover, .next:hover {
+      background: #ff1493;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    #bg-slideshow {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out;
+}
+body > *:not(#bg-slideshow) {
+  position: relative;
+  z-index: 1;
+}
+
+    #bg-slideshow img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      animation: zoom 30s infinite;
+    }
+
+    @keyframes zoom {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.05); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    .bg-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(153, 4, 73, 0.555); /* adjust opacity as needed */
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Style audio controls */
+audio {
+  width: 90%;
+  max-width: 400px;
+  margin: 20px auto 0 auto;
+  display: block;
+  background: #fff0fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(197, 1, 115, 0.15);
+  outline: none;
+}
+
+/* Hide default outline on focus for a cleaner look */
+audio:focus {
+  outline: none;
+}
+
+/* Optional: style the controls for Webkit browsers */
+audio::-webkit-media-controls-panel {
+  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  border-radius: 12px;
+}
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-timeline,
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-volume-slider {
+  filter: brightness(0.95) contrast(1.2);
+}
   </style>
 </head>
-<body>
-
-  <h1>🎉 Happy Birthday, Sweetheart! 🎂</h1>
-    <p>Today is all about you! 🌟</p>
-  <p>Wishing you a day filled with joy, laughter, and all your favorite things.</p>
-  <button onclick="showSurprise()" aria-label="Reveal birthday surprise for SIKA">Reveal Your Special Surprise MADAM <b>NURSE</b> 💖</button>
-  <div id="surprise" aria-live="polite">
-    I just want to say God bless You,  
-    May this year bring you endless opportunities and happiness! 
-    Happy Birthday!🎉🎂❤ <br><br>
-
-    for the gift de3 the Lord will provide🤣🤣
-    <div class="photo-collage">
-      <!-- Replace src with Sarah's picture URLs or local files -->
-      <img  src="images/IMG_20201128_122139_765_transcpr.jpg" alt="ABENA SIKA" class="birthday-photo">
-      <img src="images/IMG-20200927-WA0022.jpg" alt="ABENA SIKA" class="birthday-photo">
-      <img src="images/IMG-20200927-WA0023.jpg" alt="ABENA SIKA" class="birthday-photo">
-    </div>
+<body aria-label="Birthday celebration background">
+  <div id="bg-slideshow">
+    <div class="bg-overlay"></div>
   </div>
 
+  <h1>🎉 Happy Birthday, my Love! 🎂</h1>
+    <p>Today is all about you and you alone! 😁🎊🎉🎉🌟</p>
+  <p>Wishing you a day filled with joy, laughter, and all your favorite things.</p>
+  <button onclick="showSurprise()" aria-label="Reveal birthday surprise">Make a wish <b>🥰❤️❤️</b> 💖</button>
+  <div id="surprise" aria-live="polite">
+  
+    <span>Happy Birthday to my beautiful, amazing, and wonderful sister!</span>
+    <br><br>
+    
+    I just want to say God bless You, <span>May your day be filled with love, joy, and all the things that make you smile.</span> 
+    May this year bring you endless opportunities and happiness!
+    LOVE YOU SO MUCH! <P>❤️❤️❤️</P>
+    <br><br>
+
+    Happy Birthday!🎉🎂❤
+     <br><br>
+
+    for the gift hmmm....
+    <div class="slideshow-container">
+      <img class="slide-photo" src="image/233273975016_status_fbc6658032624b1cb23e516a96504709.jpg" alt="Babe">
+      <img class="slide-photo" src="image/233273975016_status_1b257819cfa14944995a0fdbf02b6a4e.jpg" alt="Babe">
+      <img class="slide-photo" src="image/233273975016_status_c330557591834acba8c14f2fa88767a0.jpg" alt="Babe">
+      <img class="slide-photo" src="image/Sweet sis 20200524_121652.jpg" alt="Babe">
+      <img class="slide-photo" src="image/IMG_20201128_152402_280.jpg" alt="Babe">
+      <img class="slide-photo" src="image/233273975016_status_64df47a6b5394e3e8a9c61f2e853f392.jpg" alt="Babe">
+      <button class="prev" onclick="plusSlides(-1)" aria-label="Previous photo">&#10094;</button>
+      <button class="next" onclick="plusSlides(1)" aria-label="Next photo">&#10095;</button>
+    </div>
+      <audio id="audio1" src="audio/The Birthday Song feat TuffCrowd Radio Edit.mp3" ></audio>
+<audio id="audio3" src="audio/Anne-Marie - BIRTHDAY Official Video.mp3"></audio>
+<audio id="audio2" src="audio/Kehlani___G-Eazy_-_Good_Life__from_The_Fate_of_the_Furious__The_Album__%5BOfficial_Music_Video%5D(256k).mp3"></audio>
+
+  </div>
+ 
   <script>
     function addSparkles() {
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 100; i++) {
         const sparkle = document.createElement("div");
         sparkle.classList.add("sparkle");
         sparkle.style.left = Math.random() * 100 + "vw";
@@ -221,6 +407,7 @@
       document.getElementById("surprise").style.display = "block";
       startConfetti();
       setTimeout(() => { isConfettiActive = false; }, 5000);
+      startAudioPlaylist(); // Start audio playlist here
     }
 
     function startConfetti() {
@@ -240,7 +427,82 @@
       }
     }
 
+    let slideIndex = 0;
+function showSlides(n) {
+  const slides = document.querySelectorAll('.slide-photo');
+  if (!slides.length) return;
+  slideIndex = (n + slides.length) % slides.length;
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === slideIndex);
+  });
+}
+function plusSlides(n) {
+  showSlides(slideIndex + n);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  showSlides(0);
+});
+setInterval(() => {
+  plusSlides(1);
+}, 3000); // Change slide every 4 seconds
+
+const bgImages = [
+  "image/233273975016_status_fbc6658032624b1cb23e516a96504709.jpg",
+  "image/233273975016_status_1b257819cfa14944995a0fdbf02b6a4e.jpg",
+  "image/233273975016_status_c330557591834acba8c14f2fa88767a0.jpg",
+  "image/Sweet sis 20200524_121652.jpg",
+  "image/IMG_20201128_152402_280.jpg",
+  "image/0961cae2092a4d758ebbae6f2cc6f93e.jpg",
+  "image/233273975016_status_64df47a6b5394e3e8a9c61f2e853f392.jpg",
+  "image/233273975016_status_7cf2340488ef48d1bb9a3da159e9f936.jpg",
+  "image/+233 54 498 4255 20200519_223259.jpg"
+];
+let bgIndex = 0;
+function showBgSlide(n) {
+  bgIndex = (n + bgImages.length) % bgImages.length;
+  document.getElementById('bg-slideshow').style.backgroundImage = `url('${bgImages[bgIndex]}')`;
+}
+setInterval(() => {
+  showBgSlide(bgIndex + 1);
+}, 3000);
+document.addEventListener('DOMContentLoaded', () => {
+  showBgSlide(0);
+});
+
     addSparkles();
+
+       let audioElements;
+let currentAudioIndex = 0;
+
+function playNextAudio() {
+    if (currentAudioIndex < audioElements.length) {
+        // Pause and reset all audios
+        audioElements.forEach(a => { a.pause(); a.currentTime = 0; });
+        // Play the current audio
+        audioElements[currentAudioIndex].play();
+    }
+}
+
+function setupAudioPlaylist() {
+    audioElements = Array.from(document.querySelectorAll('audio'));
+    for (let i = 0; i < audioElements.length; i++) {
+        audioElements[i].addEventListener('ended', function() {
+            currentAudioIndex++;
+            playNextAudio();
+        });
+    }
+}
+
+function startAudioPlaylist() {
+    currentAudioIndex = 0;
+    playNextAudio();
+}
+
+// Call this once after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    setupAudioPlaylist();
+});
+
   </script>
 
 </body>
